@@ -1,9 +1,6 @@
 import logging
 from motor.motor_asyncio import AsyncIOMotorClient
-from dotenv import load_dotenv
 from app.config import settings
-
-load_dotenv()
 
 class MongoDB:
     client: AsyncIOMotorClient = None

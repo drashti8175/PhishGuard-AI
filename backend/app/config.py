@@ -1,10 +1,13 @@
 import os
 import re
+from pathlib import Path
 from urllib.parse import quote_plus
 from dotenv import load_dotenv
 
-# Load environmental variables from .env file
-load_dotenv()
+# Resolve .env relative to this file so it works regardless of cwd
+# backend/app/config.py -> parent = backend/app -> parent = backend -> .env
+_env_path = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(dotenv_path=_env_path, override=True)
 
 def get_mongodb_uri():
     uri = os.getenv("MONGODB_URI") or os.getenv("MONGO_URI")
